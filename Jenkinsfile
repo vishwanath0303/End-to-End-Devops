@@ -50,16 +50,7 @@ pipeline {
              }
            }
           }
-     stage('Start image'){
-            steps{
-                 script{
-                   withDockerRegistry(credentialsId: '82c1e202-d6df-47f2-8ea3-377fb7929124', toolName: 'docker-latest') {
-                     sh "docker tag my-app vkulkarni0303/my-app:$BUILD_NUMBER "
-                     sh "docker push $vkulkarni0303/my-app:$BUILD_NUMBER"
-                 }
-             }
-		    }
-		   }
+
        
   }
 }
