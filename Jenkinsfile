@@ -30,6 +30,6 @@ pipeline {
 	            sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
             }
         }
-        }
+        
   }
 }
