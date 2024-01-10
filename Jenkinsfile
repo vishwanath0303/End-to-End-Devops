@@ -1,5 +1,10 @@
 pipeline {
   agent any 
+  tools {
+      jdk 'jdk11'
+      maven 'maven3'
+  }
+  
   stages {
     stage('Cloning Git') {
       steps {
@@ -16,4 +21,12 @@ pipeline {
         //if the code is compiled, we test and package it in its distributable format; run IT and store in local repository
       }
     }
+        stage('Sonar Analysis') {
+            steps {
+               withSonarQubeEnv('Sonarqube'){
+               sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
+            }
+        }
+        }
+  }
 }
