@@ -28,7 +28,7 @@ pipeline {
             steps {
                withSonarQubeEnv('Sonarqube'){
                sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
-               sh" ${SCANNER_HOME**}**}/target/sonar
+               sh "${SCANNER_HOME**}**}/target/sonar "
             }
         }
         }
