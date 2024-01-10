@@ -4,6 +4,9 @@ pipeline {
       jdk 'jdk11'
       maven 'maven3'
   }
+   environment{
+        SCANNER_HOME= tool 'Sonarqube'
+    }
   
   stages {
     stage('Cloning Git') {
@@ -25,6 +28,7 @@ pipeline {
             steps {
                withSonarQubeEnv('Sonarqube'){
                sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
+               sh" ${SCANNER_HOME**}**}/target/sonar
             }
         }
         }
