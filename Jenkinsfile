@@ -26,7 +26,7 @@ pipeline {
                 SCANNER_HOME = tool 'Sonarqube'
             }
             steps {
-                 withSonarQubeEnv('sonar') {
+                 withSonarQubeEnv('Sonarqube') {
                    sh" $SCANNER_HOME/target/sonar \
                    -Dsonar.projectKey=spring-petclinic-jenkins-pipeline1 \
                    -Dsonar.sources=. "
