@@ -42,13 +42,12 @@ pipeline {
              }
            }
           }
-    stage('Push image'){
+    stage('Start image'){
             steps{
                  script{
-                  withCredentials([usernamePassword(credentialsId:"Docker-Cred",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                    sh "docker tag my-app ${env.dockerHubUser}/my-app:latest"
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker push ${env.dockerHubUser}/my-app:latest"
+                   withDockerRegistry(credentialsId: '82c1e202-d6df-47f2-8ea3-377fb7929124', toolName: 'docker-latest') {
+                     sh "docker tag my-app vkulkarni0303/my-app:latest "
+                     sh "docker push $vkulkarni0303/my-app:latest"
                  }
              }
 		    }
