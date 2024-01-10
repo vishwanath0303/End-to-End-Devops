@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/vishwanath0303/spring-petclinic-jenkins-pipeline.git'
+        git 'https://github.com/vishwanath0303/spring-petclinic-jenkins-pipeline1.git'
       }
     }
     stage('mvn build') {
