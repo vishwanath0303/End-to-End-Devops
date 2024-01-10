@@ -31,5 +31,15 @@ pipeline {
             }
        }
       }
+    stage('Start image'){
+            steps{
+                 script{
+                   withDockerRegistry(credentialsId: '82c1e202-d6df-47f2-8ea3-377fb7929124', toolName: 'docker-latest') {
+                     sh 'docker run -d -p 8181:8181 --name spring spring:$BUILD_NUMBER '
+                 }
+             }
+           }
+          }
+       
   }
 }
