@@ -24,7 +24,7 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
 		
-                   sh "spring-petclinic-jenkins-pipeline/target/sonar \
+                   sh "spring-petclinic-jenkins-pipeline1/target/sonar \
                    -Dsonar.projectKey=spring-petclinic-jenkins-pipeline1 \
                    -Dsonar.sources=. "
 	            sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
