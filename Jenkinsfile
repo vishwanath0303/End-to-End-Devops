@@ -45,7 +45,7 @@ pipeline {
             steps{
                  script{
                    withDockerRegistry(credentialsId: '82c1e202-d6df-47f2-8ea3-377fb7929124', toolName: 'docker-latest') {
-                     sh 'docker run -d -p 8181:8181 --name my-app my-app:latest '
+                     sh 'docker run -d -p 8181:8181 --name my-app my-app:$BUILD_NUMBER '
                  }
              }
            }
