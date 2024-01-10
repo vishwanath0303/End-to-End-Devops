@@ -4,9 +4,6 @@ pipeline {
       jdk 'jdk11'
       maven 'maven3'
   }
-   environment{
-        SCANNER_HOME= tool 'Sonarqube'
-    }
   
   stages {
     stage('Cloning Git') {
@@ -25,10 +22,15 @@ pipeline {
       }
     }
         stage('Sonar Analysis') {
+          environment {
+                SCANNER_HOME = tool 'sonarqube'
+            }
             steps {
-               withSonarQubeEnv('Sonarqube'){
-               sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
-               sh "$SCANNER_HOME/target/sonar "
+                 withSonarQubeEnv('sonarqube') {
+                   sh" $SCANNER_HOME/target/sonar \
+                   -Dsonar.projectKey=spring-petclinic-jenkins-pipeline1 \
+                   -Dsonar.sources=. "
+	                  sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
             }
         }
         }
