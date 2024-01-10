@@ -21,15 +21,13 @@ pipeline {
         //if the code is compiled, we test and package it in its distributable format; run IT and store in local repository
       }
     }
-        stage('Sonar Analysis') {
-            steps {
-		
-                   sh "spring-petclinic-jenkins-pipeline1/target/sonar \
-                   -Dsonar.projectKey=spring-petclinic-jenkins-pipeline1 \
-                   -Dsonar.sources=. "
-	            sh "mvn clean package sonar:sonar  -Dsonar.exclusions=src/main/**/*.java"
+     stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t spring:$BUILD_NUMBER .'
+                }
             }
-        }
+    }
         
   }
 }
