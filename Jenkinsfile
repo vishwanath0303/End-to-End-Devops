@@ -30,6 +30,13 @@ pipeline {
                 }
             }
     }
+     stage('Start image'){
+            steps{
+                 script{
+                     sh 'docker run -d -p 8181:8181 --name my-app my-app:$BUILD_NUMBER '
+                 }
+             }
+     }
         
   }
 }
