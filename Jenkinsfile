@@ -30,6 +30,15 @@ pipeline {
             }
        }
       }
+     stage ("Stop and remove") {
+            steps {
+              script{
+                sh 'docker ps -a -q'
+                sh 'docker stop my-app '
+                sh 'docker rm my-app '
+              }
+            }
+         }
 
     stage('Start image'){
             steps{
