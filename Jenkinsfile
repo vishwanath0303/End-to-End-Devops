@@ -39,22 +39,14 @@ pipeline {
               }
             }
          }
-
-    stage('Start image'){
-            steps{
-                 script{
-                     sh 'docker run -d -p 8181:8181 --name my-app my-app:$BUILD_NUMBER '
-                 }
-             }
-           }
       
     stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag my-app ${env.dockerHubUser}/my-app:$BUILD_NUMBER"
+                sh "docker tag my-app ${env.dockerHubUser}/my-app:latest"
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/my-app:$BUILD_NUMBER"
+                sh "docker push ${env.dockerHubUser}/my-app:latest"
                 }
             }
         }
