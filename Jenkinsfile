@@ -39,8 +39,6 @@ pipeline {
                 sh "docker tag my-app:$BUILD_NUMBER ${env.dockerHubUser}/my-app:$BUILD_NUMBER"
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                 sh "docker push ${env.dockerHubUser}/my-app:$BUILD_NUMBER"
-                sh "docker tag my-app:$BUILD_NUMBER ${env.dockerHubUser}/my-app:latest"
-                sh "docker push ${env.dockerHubUser}/my-app:latest"
                 }
             }
         }
