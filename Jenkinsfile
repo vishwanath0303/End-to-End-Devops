@@ -30,8 +30,25 @@ pipeline {
             }
        }
       }
+    stage ("Stop and remove") {
+            steps {
+              script{
+                sh 'docker ps -a -q'
+                sh 'docker stop my-app '
+                sh 'docker rm my-app '
+              }
+            }
+         }
   
-      
+      stage('Start image'){
+            steps{
+                 script{
+                  
+                     sh 'docker run -d -p 8181:8181 --name my-app my-app:$BUILD_NUMBER '          
+             }
+           }
+          }
+       
     stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
